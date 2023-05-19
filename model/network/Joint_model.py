@@ -5,7 +5,7 @@ import torch
 from .Transformer import *
 from .invariant_point_attention import IPA_Stack
 from  ..primitives import Linear
-from model.network.Generator import Generator,Graph_MSA
+from model.network.Generator import Generator
 
 from ..Rigid import Rigid,Rotation
 from ..chems import add_chem_features,light_PositionalEncoding
