@@ -1,60 +1,65 @@
 absl-py==1.4.0
-biopython @ file:///tmp/build/80754af9/biopython_1632748419437/work
+biopython==1.81
 biotite==0.35.0
-Bottleneck @ file:///opt/conda/conda-bld/bottleneck_1657175564434/work
 brotlipy==0.7.0
-certifi @ file:///croot/certifi_1671487769961/work/certifi
-cffi @ file:///tmp/abs_98z5h56wf8/croots/recipe/cffi_1659598650955/work
-charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+certifi==2023.5.7
+cffi==1.15.1
+charset-normalizer==3.1.0
+cmake==3.26.3
 contextlib2==21.6.0
-contourpy @ file:///opt/conda/conda-bld/contourpy_1663827406301/work
-cryptography @ file:///croot/cryptography_1673298753778/work
-cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
 dm-tree==0.1.8
 easydict==1.10
 einops==0.6.0
 filelock==3.9.0
-flit_core @ file:///opt/conda/conda-bld/flit-core_1644941570762/work/source/flit_core
 fonttools==4.25.0
-huggingface-hub==0.11.1
-idna @ file:///croot/idna_1666125576474/work
-iminuit==1.5.4
-kiwisolver @ file:///croot/kiwisolver_1672387140495/work
-matplotlib @ file:///croot/matplotlib-suite_1670466153205/work
-mkl-fft==1.3.1
-mkl-random @ file:///tmp/build/80754af9/mkl_random_1626186066731/work
+fsspec==2023.5.0
+huggingface-hub==0.14.1
+idna==3.4
+intel-cmplr-lib-rt==2023.0.0
+intel-cmplr-lic-rt==2023.0.0
+intel-opencl-rt==2023.0.0
+intel-openmp==2023.0.0
+Jinja2==3.1.2
+lit==16.0.5
+MarkupSafe==2.1.2
+mkl==2023.1.0
 mkl-service==2.4.0
 ml-collections==0.1.1
+mpmath==1.3.0
 msgpack==1.0.4
 munkres==1.1.4
 networkx==3.0
-numexpr @ file:///croot/numexpr_1668713893690/work
-numpy @ file:///croot/numpy_and_numpy_base_1672336185480/work
-OpenMM==7.6.0
+numpy==1.22.4
+nvidia-cublas-cu11==11.10.3.66
+nvidia-cuda-cupti-cu11==11.7.101
+nvidia-cuda-nvrtc-cu11==11.7.99
+nvidia-cuda-runtime-cu11==11.7.99
+nvidia-cudnn-cu11==8.5.0.96
+nvidia-cufft-cu11==10.9.0.58
+nvidia-curand-cu11==10.2.10.91
+nvidia-cusolver-cu11==11.4.0.1
+nvidia-cusparse-cu11==11.7.4.91
+nvidia-nccl-cu11==2.14.3
+nvidia-nvtx-cu11==11.7.91
+OpenMM==7.7.0
 packaging==23.0
 palmerpenguins==0.1.4
 pandas==1.5.2
 pdbfixer @ file:///home/conda/feedstock_root/build_artifacts/pdbfixer_1631833746479/work
 Pillow==9.0.1
-pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
-pyOpenSSL @ file:///opt/conda/conda-bld/pyopenssl_1643788558760/work
-pyparsing @ file:///opt/conda/conda-bld/pyparsing_1661452539315/work
-PySocks @ file:///tmp/build/80754af9/pysocks_1605305812635/work
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
-pytz @ file:///croot/pytz_1671697431263/work
+pycparser==2.21
+python-dateutil==2.8.2
+pytz==2023.3
 PyYAML==6.0
-requests @ file:///opt/conda/conda-bld/requests_1657734628632/work
+requests==2.30.0
 scipy==1.9.3
-seaborn @ file:///croot/seaborn_1673479180098/work
-sip==4.19.13
-six @ file:///tmp/build/80754af9/six_1644875935023/work
+six==1.16.0
+sympy==1.12
+tbb==2021.9.0
 timm==0.6.12
-tmscoring==0.4.post0
-torch==1.13.1
-torchaudio==0.13.1
-torchvision==0.14.1
-tornado @ file:///opt/conda/conda-bld/tornado_1662061693373/work
+torch==2.0.1
+torchvision==0.15.2
 tqdm==4.64.1
-typing_extensions @ file:///croot/typing_extensions_1669924550328/work
-urllib3 @ file:///croot/urllib3_1670526988650/work
-wget==3.2
+triton==2.0.0
+typing_extensions==4.5.0
+urllib3==2.0.2

@@ -19,7 +19,7 @@ from model.np.residue_constants import  (
     restype_atom14_mask,
     restype_atom14_rigid_group_positions,
 )
-from model.network.minigpt import GPT
+
 
 # Attention module based on AlphaFold2's idea written by Minkyung Baek
 #  - Iterative MSA feature extraction

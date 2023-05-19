@@ -26,7 +26,7 @@ from model.np.residue_constants import  (
     chi_angles_mask
 )
 
-from model.network.Tri_atten.triangular_attention import TriangleAttentionStartingNode,TriangleAttentionEndingNode
+
 from data.data_module import tied_features
 from model.np import residue_constants
 
@@ -812,15 +812,7 @@ class Joint_layer(nn.Module):
         self.msa2Single= MSA2SINGLE(d_msa=d_msa, p_drop=p_drop, )  #
         # self.msa2_trans=MSATransition(d_msa,n_head_msa)   #
 
-        # #2. pair update
-        # self.out_p_mean=OuterProductMean( c_m=d_msa, c_z=32, c_hidden=32)
-        # self.tri_s=TriangleAttentionStartingNode(c_in=32, c_hidden=32, no_heads=1)
-        # self.tri_e=TriangleAttentionEndingNode(c_in=32, c_hidden=32, no_heads=1)
-        # self.pair_trans=PairTransition(c_z=32,n=4)
 
-        # 2. MSA pair
-        # self.out_p_mean=OuterProductMean( c_m=d_msa, c_z=32, c_hidden=32)
-        # self.msa2pair = MSA2Pair()
 
 
         # 3. Structure refine
@@ -840,16 +832,6 @@ class Joint_layer(nn.Module):
         # 0. MSA refine
         msa=self.MSASTACK(msa,Ca=None,state=None,residue_indexs=residue_indexs,mask=mask,MSA2MSA=True,return_att=False)
 
-        # # 1. msa 2 pair
-        # opm = self.out_p_mean(msa, mask)
-        # pair = add(pair, opm, inplace=False)
-        #
-        # # pair=self.tri_s(pair)
-        # # pair=self.tri_e(pair)
-        # #
-        # # # pair=self.msa2pair(pair,atten)
-        # msa=self.pair2msa(pair,msa.unsqueeze(1)).squeeze(1)
-        # pair_str=self.pair_trans(pair)
 
 
 
@@ -913,11 +895,7 @@ class Joint_encoder_layer(nn.Module):
         # 2. MSA pair
         self.msa2pairs = MSA2Pair()
 
-        #2. tri
-        #self.tri_s=TriangleAttentionStartingNode(c_in=32, c_hidden=32, no_heads=1)
-        #self.tri_e=TriangleAttentionEndingNode(c_in=32, c_hidden=32, no_heads=1)
 
-        #self.pair_trans = PairTransition(c_z=32, n=2)
 
 
 
@@ -938,12 +916,7 @@ class Joint_encoder_layer(nn.Module):
         pair=self.msa2pairs(pair,atten)
 
 
-        # # #tri
-        # opm = self.out_p_mean(state_init, mask)
-        # pair = add(pair, opm, inplace=False)
-        # pair=self.tri_s(pair,mask[...,None,:]*mask[...,None])
-        # pair=self.tri_e(pair,mask[...,None,:]*mask[...,None])
-        # pair = self.pair_trans(pair, mask[...,None,:]*mask[...,None])
+
 
 
 
