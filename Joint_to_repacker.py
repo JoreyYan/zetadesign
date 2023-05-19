@@ -291,7 +291,7 @@ class argsx():
         return aatypes,result['recovery']
 
 
-    def design_step(self, epoch,name,use_J,use_amber):
+    def design_step(self,name,use_J,use_amber):
 
         with torch.no_grad():
             # tools
@@ -299,7 +299,7 @@ class argsx():
                 ['Ca_lddt', 'angles_acc1', 'angles_acc2', 'angles_acc3', 'angles_acc4',
                  'angles_acc5', 'angles_acc6', 'angles_acc7','recovery'])
             losses = AverageMeter(['bfloss', 'ca loss', 'chi loss', 'bb angles loss'])
-            logging.info(f"\n[VAL] Start val epoch {epoch}", )
+            logging.info(f"\n[Design] Start designing", )
             t = tqdm.tqdm(self.testloader)
             val_step=0
             # test
@@ -307,7 +307,8 @@ class argsx():
                 if name!=None:
                     if proteins['domain_name'][0].decode('UTF-8') != name:
                         continue
-                print('designing:',proteins['domain_name'][0].decode('UTF-8'))
+                logging.info(100 * '-')
+                logging.info('designing  '+proteins['domain_name'][0].decode('UTF-8'))
                 proteins=[proteins]
                 x, aatypes, seq_masks, residue_indexs, gt_batchs = tied_features(
                     proteins, self.device, False if self.trainmodel == 'G' else True)
@@ -341,13 +342,13 @@ class argsx():
                     if val_step % self.vis['logging_per_update'] == 0:
                         logging.info(
                             "ca_lddt:%.2f;Angle_accs1:%.2f;2:%.2f;3:%.2f;chi1:%.2f;chi2:%.2f;chi3:%.2f;chi4:%.2f;recovery:%.2f" % (
-                                float(acc.avg(0)), float(acc.avg(1)), float(acc.avg(2)), float(acc.avg(3)),
-                                float(acc.avg(4)), float(acc.avg(5)), float(acc.avg(6)), float(acc.avg(7)),
-                                float(acc.avg(8))
+                                float(acc.val(0)), float(acc.val(1)), float(acc.val(2)), float(acc.val(3)),
+                                float(acc.val(4)), float(acc.val(5)), float(acc.val(6)), float(acc.val(7)),
+                                float(acc.val(8)),
                             ))
                         logging.info(
                             "bfloss:%.2f;fapeloss:%.2f;chi_angle_loss:%.2f;bb_angle_loss:%.2f;step %d；" % (
-                                float(losses.avg(0)), float(losses.avg(1)), float(losses.avg(2)), float(losses.avg(3)),
+                                float(losses.val(0)), float(losses.val(1)), float(losses.val(2)), float(losses.val(3)),
                                 self.global_step,
                             ))
                         logging.info(50 * '-')
@@ -364,25 +365,46 @@ class argsx():
                     if val_step % self.vis['logging_per_update'] == 0:
                         logging.info(
                             "ca_lddt:%.2f;Angle_accs1:%.2f;2:%.2f;3:%.2f;chi1:%.2f;chi2:%.2f;chi3:%.2f;chi4:%.2f;" % (
-                                float(acc.avg(0)), float(acc.avg(1)), float(acc.avg(2)), float(acc.avg(3)),
-                                float(acc.avg(4)), float(acc.avg(5)), float(acc.avg(6)), float(acc.avg(7))
+                                float(acc.val(0)), float(acc.val(1)), float(acc.val(2)), float(acc.val(3)),
+                                float(acc.val(4)), float(acc.val(5)), float(acc.val(6)), float(acc.val(7)),
+
                         ))
                         logging.info(
                             "bfloss:%.2f;fapeloss:%.2f;chi_angle_loss:%.2f;bb_angle_loss:%.2f;step %d；" % (
-                                float(losses.avg(0)), float(losses.avg(1)), float(losses.avg(2)),
-                                float(losses.avg(3)),
+                                float(losses.val(0)), float(losses.val(1)), float(losses.val(2)), float(losses.val(3)),
                                 self.global_step,
                             ))
                         logging.info(50 * '-')
 
+
                 self.relax(protein,use_amber)
-
-
-
-
+                logging.info(100 * '-')
                 val_step=val_step+1
 
-    def design_step_byseq(self, epoch,pre_name,pre_aatype):
+            logging.info( 'ALL batch simply averaged : ')
+
+            if  use_J:
+                logging.info(
+                    "ca_lddt:%.2f;Angle_accs1:%.2f;2:%.2f;3:%.2f;chi1:%.2f;chi2:%.2f;chi3:%.2f;chi4:%.2f;recovery:%.2f" % (
+                        float(acc.avg(0)), float(acc.avg(1)), float(acc.avg(2)), float(acc.avg(3)),
+                        float(acc.avg(4)), float(acc.avg(5)), float(acc.avg(6)), float(acc.avg(7)),
+                        float(acc.avg(8))
+                    ))
+            else:
+                logging.info(
+                    "ca_lddt:%.2f;Angle_accs1:%.2f;2:%.2f;3:%.2f;chi1:%.2f;chi2:%.2f;chi3:%.2f;chi4:%.2f" % (
+                        float(acc.avg(0)), float(acc.avg(1)), float(acc.avg(2)), float(acc.avg(3)),
+                        float(acc.avg(4)), float(acc.avg(5)), float(acc.avg(6)), float(acc.avg(7)),
+
+                    ))
+
+            logging.info(
+                "bfloss:%.2f;fapeloss:%.2f;chi_angle_loss:%.2f;bb_angle_loss:%.2f;step %d；" % (
+                    float(losses.avg(0)), float(losses.avg(1)), float(losses.avg(2)), float(losses.avg(3)),
+                    self.global_step,
+                ))
+
+    def design_step_byseq(self,pre_name,pre_aatype):
 
         with torch.no_grad():
             # tools
@@ -391,7 +413,7 @@ class argsx():
                 ['Ca_lddt', 'angles_acc1', 'angles_acc2', 'angles_acc3', 'angles_acc4',
                  'angles_acc5', 'angles_acc6', 'angles_acc7','Recovery'])
             losses = AverageMeter(['q loss', 'ca loss', 'chi loss', 'bb angles loss'])
-            logging.info(f"\n[VAL] Start val epoch {epoch}", )
+            logging.info(f"\n[Design] Start designing", )
             t = tqdm.tqdm(self.testloader)
             val_step=0
             # test
@@ -451,10 +473,6 @@ class argsx():
                 val_step = val_step + 1
 
 
-    def write_chis(self,chis,name,**kwargs):
-        chis=chis.tolist()
-        with open('/home/jorey/pdhs/designPDB/relax/chi_'+name+'.txt','w') as f:
-            f.writelines(json.dumps(chis))
 
     def write_fa(self,name,aatype,res,recovery,add='A',notadd=True):
         aatype_list=aatype.detach().cpu().numpy().squeeze().tolist()
@@ -585,7 +603,7 @@ class argsx():
         self.Repacker.zero_grad()
         self.Repacker.eval()
 
-        self.design_step(0,name,use_J,use_amber)
+        self.design_step(name,use_J,use_amber)
 
 
 
@@ -597,7 +615,7 @@ class argsx():
         aatype=torch.as_tensor(aatype).cuda().unsqueeze(0)
 
         #load MODEL
-        self.load_module() ##self.checkpoint['R_per_weight']
+        self.load_module()
         # build dataset
         testloader = StructureDataset(self.dataset['designset'], **self.dataset)
 
@@ -613,44 +631,7 @@ class argsx():
         self.design_step_byseq(0,name,aatype)
 
 
-    def dsign_formpnn(self):
-        MPNNDIR='///home/jorey/ProDCoNN/casp14/'
-        pdbs=glob.glob(MPNNDIR+'*.fasta')
-        self.output_dir='//home/jorey/ProDCoNN/casp14pdb/'
-        #load MODEL
-        self.load_module() ##self.checkpoint['R_per_weight']
-        # build dataset
-        testloader = StructureDataset(self.dataset['designset'], **self.dataset)
 
-        self.Joint.zero_grad()
-        self.Joint.eval()
-        self.Repacker.zero_grad()
-        self.Repacker.eval()
-
-
-        self.testloader = testloader
-
-        for i in pdbs:
-            name=i.split('/')[-1].split('.')[0].split('_')[0]
-
-            if os.path.exists(args.output_dir+name+'_relaxed.pdb'):
-                print('skip:',name)
-                continue
-
-            # if name!='T1145-D2':
-            #     continue
-            F=open(i,'r')
-            F=F.readlines()
-            seq=F[-1].split('\n')[0].replace('X','')
-
-
-            aatype = [restype_order_with_x[i] for i in seq]
-            aatype = torch.as_tensor(aatype).cuda().unsqueeze(0)
-
-            #try:
-            self.design_step_byseq(0, name.upper(), aatype)
-            # except:
-            #     print('error:',name)
 
 
 def read_fasta(file_path):
@@ -703,6 +684,7 @@ if __name__ == "__main__":
     # Add arguments for input and output directories
     parser.add_argument('--use_amber', action='store_true', default=False, help='Using Amber for optimizing the output results')
     parser.add_argument('--use_fbb', action='store_true', default=False, help='Using fbb to generate new sequences')
+    parser.add_argument('--pkl_dir', type=str, default='./design/CASP15_nocut.pkl', help='pkl file made from pdbs')
 
 
     # Parse the command-line arguments
@@ -710,4 +692,5 @@ if __name__ == "__main__":
     print('--use_amber=',argss.use_amber)
     print('--use_fbb=',argss.use_fbb)
     # Call the function with the provided input and output directories
+    args.dataset['designset']=argss.pkl_dir
     args.design(None,argss.use_fbb,argss.use_amber)
