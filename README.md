@@ -1,9 +1,9 @@
-# zetadesign
+# Zetadesign
 
 ## Environment
 You can configure the environment using either `requirements.txt` or `conda+environment.yaml`. It is recommended to use the latter as some packages have specific requirements. 
 For example, `pdbfixer` is recommended to be installed using `conda install -c conda-forge pdbfixer` as it requires the latest version of `pdbfixer` which uses `openmm8.0`. 
-However, this may cause conflicts with other packages, so please be cautious during installation. If you encounter any issues, feel free to contact me via email.
+However, this may cause conflicts with other packages, so please be cautious during installation. It is recommended to use Python version 3.9 or lower to avoid potential errors with the OpenMM version exceeding 7.7. If you encounter any issues, feel free to contact me via email.
 
 ## Data
 We use the `cath4.3-s40-no redundant` dataset, which can be downloaded using the multi-threaded script `/data/download-chains.py`. Alternatively, 
