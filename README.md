@@ -19,11 +19,13 @@ and then split the dataset into training and test sets following the 95% - 5% ra
 
 Some PDB files (approximately a few dozen) have insert code errors. You can choose to drop them or use [pdb-tools](http://www.bonvinlab.org/pdb-tools/) to correct them. Our `spilt_dataset.py` also includes the `write_trainandtest` method to output PDB files as JSON. Additionally, you can use the `test_insert()` method in `single_chain_split.py` to identify which PDB files have issues.
 
-We provide several methods in `single_chain_split.py` to write PDB files as pickle files, each with a different amount of extracted features.
+We provide several methods in `single_chain_split.py` to write PDB files as pickle files, each with a different amount of extracted features.  
 
 If you want to train the Fix Backbone Design algorithm, we recommend using the `write_fbb_pdb_files_to_pickl` method. For training the Repacking algorithm, you can use `write_allatomspdb_files_to_pickl`. The length of each training data will be truncated to 256. If you are running FBB design or repacking on multiple new PDB files, you can use `write_design_pdb_files_to_pickl` to write them as a single pickle file. Please note that this method requires the installation of DSSP tool, which can be installed beforehand from [https://swift.cmbi.umcn.nl/gv/dssp/](https://swift.cmbi.umcn.nl/gv/dssp/).
 
 If you want to test new sample PDB files, you can place them in the `/demo/` folder. After running `single_chain_split.py`, you will obtain the `processed_pdb.pkl` file.
+
+**Note**: If you run `single_chain_split.py`, you will need to have dssp installed locally, for example, by running `sudo apt-get install dssp`.
 
 The PDB files used for testing in CASP14/CASP15 mentioned in the paper are located in the CASP14/CASP15 pkl folders.
 
