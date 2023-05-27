@@ -25,7 +25,7 @@ If you want to train the Fix Backbone Design algorithm, we recommend using the `
 
 If you want to test new sample PDB files, you can place them in the `/demo/` folder. After running `single_chain_split.py`, you will obtain the `processed_pdb.pkl` file.
 
-**Note**: If you run `single_chain_split.py`, you will need to have dssp installed locally, for example, by running `sudo apt-get install dssp`.
+**Note**: If you run `single_chain_split.py`, you will need to have dssp installed locally, for example, by running `conda install -c salilab dssp`.
 
 The PDB files used for testing in CASP14/CASP15 mentioned in the paper are located in the CASP14/CASP15 pkl folders.
 
