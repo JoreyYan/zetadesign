@@ -1520,9 +1520,7 @@ class Repacker_Str_Encoder(nn.Module):
 
         features = self.chinorm(self.linearouts(h_V))
 
-        # write e back
-        # h_E=self.W_es(h_E)
-        # hE=edgek_to_all(h_E,E_idx,batch,L)
+
         return features,h_E
 
     def _positional_embeddings(self, pos,

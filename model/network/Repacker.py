@@ -1238,8 +1238,6 @@ class Repacker(nn.Module):
 
         usechem=True
         bb_b_factors=gt_batchs['b_factors'][:,:,[0,1,2,4]]/self.bf_sacle
-        # print(torch.max(gt_batchs['sse3']))
-        # print(torch.max(gt_batchs['sse8']))
         sse3_emb=self.sse3_emb(gt_batchs['sse3'])
         sse8_emb=self.sse8_emb(gt_batchs['sse8'])
         cen_emb=self.cen_emb(gt_batchs['cens'])
