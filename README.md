@@ -1,5 +1,10 @@
 # Zetadesign
 
+There is CodeOcean link:
+![CodeOcean](https://codeocean.com/capsule/5271163/tree/v1)
+
+
+
 ## Environment
 You can configure the environment using either `requirements.txt` or `conda+environment.yaml`. It is recommended to use the latter as some packages have specific requirements. 
 For example, `pdbfixer` is recommended to be installed using `conda install -c conda-forge pdbfixer` as it requires the latest version of `pdbfixer` which uses `openmm8.0`. 
