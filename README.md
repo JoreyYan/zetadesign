@@ -1,7 +1,7 @@
 # Zetadesign
 
 There is CodeOcean link:
-![CodeOcean](https://codeocean.com/capsule/5271163/tree/v1)
+(https://codeocean.com/capsule/5271163/tree/v1)
 
 
 
