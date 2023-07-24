@@ -5,6 +5,8 @@ There is CodeOcean link:
 
 Author Email: joreyyan@buaa.edu.cn 
 
+Publication: https://academic.oup.com/bib/article-abstract/24/4/bbad257/7222295?redirectedFrom=fulltext
+
 
 
 ## Environment
