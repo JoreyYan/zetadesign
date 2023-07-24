@@ -433,8 +433,8 @@ class argsx():
                     pre_aatype=pre_aatype[0][index]
                     aatypes=pre_aatype.unsqueeze(0)
 
-                    # aatypes = pre_aatype
-                    recovery=np.asarray([37])
+                    # aatypes = pre_aatype  
+                    recovery=np.asarray([37])  #  here should be update to calculate inputseqs' recovery
 
 
                 input = {'X': x, 'S': aatypes, 'mask': seq_masks, 'residue_idx': residue_indexs}
